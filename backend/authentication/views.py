@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework import status
 from .serializers import RegisterSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -13,13 +15,12 @@ def register_user(request):
     if serializer.is_valid():
         serializer.save()
         return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+    # print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login_user(request):
-    from django.contrib.auth import authenticate
-
     email = request.data.get("email")
     password = request.data.get("password")
 
