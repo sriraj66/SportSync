@@ -2,16 +2,20 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { TextField, Button, Paper, Typography, Alert, Box } from '@mui/material'
 import { useAuth } from '../contexts/AuthContext'
+import Loader from '../components/utils/Loader'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [ isloading, setIsloading ] = useState(false);
+
   const navigate = useNavigate()
   const { login } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsloading(true);
     try {
       await login({
         email: email,
@@ -20,11 +24,15 @@ function Login() {
       navigate('/dashboard')
     } catch (error) {
       setError(error.message)
+    }finally{
+      setIsloading(false)
     }
   }
 
   return (
-    <Box
+    <>
+      <Loader state={isloading} />
+      <Box
       sx={{
         minHeight: '100vh',
         display: 'flex',
@@ -75,13 +83,14 @@ function Login() {
           </Button>
         </form>
         <Typography sx={{ mt: 3, textAlign: 'center', color: 'gray' }}>
-          Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
           <Link to="/register" style={{ color: '#15803d', fontWeight: 'bold', textDecoration: 'none' }}>
             Create Account
           </Link>
         </Typography>
       </Paper>
     </Box>
+    </>
   )
 }
 
