@@ -4,6 +4,7 @@ import PrivateRoute from './components/PrivateRoute'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import Theme1 from './components/cricket/Theme1'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/theme1" element={<Theme1 />} />
         <Route
           path="/dashboard"
           element={

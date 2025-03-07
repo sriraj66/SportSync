@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Container, Paper, Box, Grid } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import {  SportsCricketOutlined, SkipNextOutlined } from "@mui/icons-material";
+import {  SportsCricketOutlined, SkipNextOutlined, DashboardCustomizeOutlined } from "@mui/icons-material";
 
 function Dashboard() {
   const { user, logout } = useAuth();
@@ -14,6 +14,7 @@ function Dashboard() {
 
   const features = [
     { icon: <SportsCricketOutlined fontSize="large" color="primary" />, title: "Create new Stream", description: "Create an new Stream" },
+    { icon: <DashboardCustomizeOutlined  onClick={()=>navigate("/theme1")}  fontSize="large" color="primary" />, title: "Sample Dashboard overlay", description: "Scoreboaard theme for development" },
   ];
 
   return (
