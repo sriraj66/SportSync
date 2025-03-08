@@ -42,3 +42,14 @@ def testLogin(request):
         "user" : request.user.username,
         "status" : "Login Successfull"
     })
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserDetail(request):
+    user = User.objects.get(username=request.user.username)
+    data = {
+        "email" : user.email,
+        "first_name" : user.first_name,
+        "last_name" : user.last_name
+    }
+    return Response(data)
